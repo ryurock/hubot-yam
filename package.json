@@ -30,5 +30,8 @@
   "dist": {
     "shasum": "add656f53fb91d098b699691d8cf99d3d60f4794"
   },
-  "_from": "../hubot-yam/"
+  "_from": "../hubot-yam/",
+  "dependencies": {
+    "yammer-push-api-client": "^1.1.1"
+  }
 }
