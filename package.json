@@ -1,0 +1,34 @@
+{
+  "name": "hubot-yam",
+  "version": "0.0.0",
+  "description": "Yammer adapter for Hubot oauth2 ",
+  "main": "./src/yam",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryurock/hubot-yam.git"
+  },
+  "keywords": [
+    "yammer",
+    "github",
+    "adapter",
+    "oauth2"
+  ],
+  "author": {
+    "name": "Ryusuke Kimura"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryurock/hubot-yam/issues"
+  },
+  "homepage": "https://github.com/ryurock/hubot-yam",
+  "readme": "hubot-yam\n=========\n\nYammer adapter for Hubot oauth2\n",
+  "readmeFilename": "README.md",
+  "_id": "hubot-yam@0.0.0",
+  "dist": {
+    "shasum": "add656f53fb91d098b699691d8cf99d3d60f4794"
+  },
+  "_from": "../hubot-yam/"
+}
