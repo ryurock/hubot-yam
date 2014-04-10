@@ -13,22 +13,10 @@ class Yam extends Adapter
 
     bot = new YamRealTime options, @robot
 
-
-    bot.on("data", (data) ->
-      console.log("new data received: " + JSON.stringify(data))
-    )
-
-    bot.on("error", (data) ->
-      console.log("Error received: " + JSON.stringify(data))
-    )
-
-    bot.on("fatal", (data) ->
-      console.log("Fatal error received: " + response)
-    )
-
     bot.on 'message', (userId, userData, message) ->
-      user = @robot.brain.userForId userId, userData
-      @receive new TextMessage user, message
+      console.log "******************************************"
+      #user = @robot.brain.userForId userId, userData
+      #@receive new TextMessage user, message
 
     bot.listen()
 
@@ -57,7 +45,9 @@ class YamRealTime extends EventEmitter
     # @emit 'message', user, message
 
     @bot.on("data", (data) ->
-      console.log("new data received: " + JSON.stringify(data))
+      console.log "******************************************"
+      @emit 'message', 111, "userData", data
+      #console.log("new data received: " + JSON.stringify(data))
     )
 
     @bot.on("error", (data) ->
