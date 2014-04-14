@@ -12,7 +12,7 @@ class Yam extends Adapter
   run: ->
     self = @
     options =
-      token:   process.env.HUBOT_YAM_TOKEN
+      token:  process.env.HUBOT_YAM_TOKEN
       group:  process.env.HUBOT_YAM_GROUP
 
     bot = new YamRealTime options, @robot
@@ -51,12 +51,12 @@ class YamRealTime extends EventEmitter
 
     yamParams =
       body : message
-      replied_to_id : envelope.user.thread_id
+      replied_to_id : envelope.room.thread_id
 
     console.log yamParams
 
-    #yam.createMessage yamParams, (err, data, res) ->
-    #  console.log "[Notified] send"
+    yam.createMessage yamParams, (err, data, res) ->
+      console.log "[Notified] send"
 
 
   listen: ->
@@ -74,19 +74,25 @@ class YamRealTime extends EventEmitter
         messages   = data.messages
 
         messages.forEach((message) ->
-          userId    = message.sender_id
-          userName  = ''
-          for reference, index in references
-            continue unless reference.type == 'user' and userId == reference.id
-            userName = reference.name
 
-          threadId = message.replied_to_id
-          text     = message.body.plain
+          threadId  = message.thread_id
+          text      = message.body.plain
+          userId    = message.sender_id
+
+          userName  = ''
+          room      = { thread_id : threadId }
+          for reference, index in references
+            userName = reference.name if reference.type == 'user' and userId == reference.id
+            if reference.type == 'group'
+              console.log reference
+              room.group_id  = reference.id        if reference.id?
+              room.full_name = reference.full_name if reference.full_name?
+              room.name      = reference.name      if reference.name?
 
           user =
             name      : userName
             id        : userId
-            thread_id : threadId
+            room      : room
 
           user = robot.brain.userForId userId, user
           console.log '============================ myhubot/scripts/*の method respond /正規表現にデータが渡される/ ============================'
