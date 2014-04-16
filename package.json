@@ -26,11 +26,6 @@
   "homepage": "https://github.com/ryurock/hubot-yam",
   "readme": "hubot-yam\n=========\n\nYammer adapter for Hubot oauth2\n",
   "readmeFilename": "README.md",
-  "_id": "hubot-yam@0.0.0",
-  "dist": {
-    "shasum": "add656f53fb91d098b699691d8cf99d3d60f4794"
-  },
-  "_from": "../hubot-yam/",
   "dependencies": {
     "yammer-push-api-client": "^1.1.1",
     "yammer": "~0.1.0",
