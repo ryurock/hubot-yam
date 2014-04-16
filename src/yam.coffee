@@ -3,6 +3,7 @@
 YammerPushAPI = require('yammer-push-api-client')
 {Yammer} = require('yammer')
 Util = require('util')
+require('colors')
 
 class Yam extends Adapter
   send: (envelope, strings...) ->
@@ -46,14 +47,12 @@ class YamRealTime extends EventEmitter
 
   send: (envelope, message) ->
     # チャットにメッセージを送信する処理...
-    console.log envelope
+    #console.log envelope
     yam = new Yammer { access_token : @bot.oauthToken }
 
     yamParams =
       body : message
       replied_to_id : envelope.room.thread_id
-
-    console.log yamParams
 
     yam.createMessage yamParams, (err, data, res) ->
       console.log "[Notified] send"
@@ -84,7 +83,6 @@ class YamRealTime extends EventEmitter
           for reference, index in references
             userName = reference.name if reference.type == 'user' and userId == reference.id
             if reference.type == 'group'
-              console.log reference
               room.group_id  = reference.id        if reference.id?
               room.full_name = reference.full_name if reference.full_name?
               room.name      = reference.name      if reference.name?
@@ -95,7 +93,7 @@ class YamRealTime extends EventEmitter
             room      : room
 
           user = robot.brain.userForId userId, user
-          console.log '============================ myhubot/scripts/*の method respond /正規表現にデータが渡される/ ============================'
+          console.log '============================ scripts/* method respond fire  ============================'.yellow
           robot.receive new TextMessage user, text
         )
       )
