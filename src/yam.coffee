@@ -46,8 +46,6 @@ class YamRealTime extends EventEmitter
     @bot.robot = @robot
 
   send: (envelope, message) ->
-    # チャットにメッセージを送信する処理...
-    #console.log envelope
     yam = new Yammer { access_token : @bot.oauthToken }
 
     yamParams =
@@ -59,8 +57,6 @@ class YamRealTime extends EventEmitter
 
 
   listen: ->
-    # チャットから継続的にメッセージを取得する処理
-    # メッセージを取得したら...
     @bot.on("data", (data) ->
       robot = this.robot
 
