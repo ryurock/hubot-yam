@@ -47,14 +47,18 @@ class YamRealTime extends EventEmitter
 
   send: (envelope, message) ->
     yam = new Yammer { access_token : @bot.oauthToken }
-
     yamParams =
       body : message
-      replied_to_id : envelope.room.thread_id
+
+    yamParams.replied_to_id = envelope.room.thread_id unless envelope.message.options?
+
+    if envelope.message.options?
+      if envelope.message.options.direct_to_id?
+        console.log "------------- private message send -------------"
+        yamParams.direct_to_id = envelope.message.options.direct_to_id
 
     yam.createMessage yamParams, (err, data, res) ->
       console.log "[Notified] send"
-
 
   listen: ->
     @bot.on("data", (data) ->
