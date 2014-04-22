@@ -50,12 +50,10 @@ class YamRealTime extends EventEmitter
     yamParams =
       body : message
 
-    yamParams.replied_to_id = envelope.room.thread_id unless envelope.message.options?
-
-    if envelope.message.options?
-      if envelope.message.options.direct_to_id?
-        console.log "------------- private message send -------------"
-        yamParams.direct_to_id = envelope.message.options.direct_to_id
+    if envelope.room?
+      yamParams.replied_to_id = envelope.room.thread_id                       if envelope.room.thread_id?
+      yamParams.group_id      = envelope.room.group_id                        if envelope.room.group_id?
+      yamParams = body : message, direct_to_id : envelope.room.direct_to_id   if envelope.room.direct_to_id?
 
     yam.createMessage yamParams, (err, data, res) ->
       console.log "[Notified] send"
