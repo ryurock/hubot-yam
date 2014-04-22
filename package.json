@@ -1,6 +1,6 @@
 {
   "name": "hubot-yam",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yammer adapter for Hubot oauth2 ",
   "main": "./src/yam",
   "scripts": {
